@@ -13,7 +13,7 @@ namespace Project2
         private int amount; //ticket amount
         private int quantity; // # of tickets ordered
         private string senderId; // sender id , thread ID, ticketbroker
-        private string receverId;// recever thread name , 
+        private string receiverId;// recever thread name , 
         private DateTime timestamp = DateTime.Today;
 
 
@@ -40,6 +40,17 @@ namespace Project2
             }
         }
 
+        public string receiverID
+        {
+           get
+            {
+                return receiverId;
+            }
+            set
+            {
+                receiverId = value;
+            }
+        }
         public int Quantity
         {
             get
@@ -71,6 +82,8 @@ namespace Project2
             return amount;
         }
 
+        
+      
         public DateTime TimeStamp
         {
             get
@@ -94,21 +107,13 @@ namespace Project2
         }
 
 
-        public string getReceiverId()
-        {
-            return receverId;
-        }
-
-        public void setReceiverId(string r_ID)
-        {
-            receverId = r_ID;
-        }
+  
        
 
         public override string ToString()
         {
             string order = "Order Ticket \n\t {SENDER ID: " + senderId
-                + "} \n\t {RECEIVER ID: " + receverId
+                + "} \n\t {RECEIVER ID: " + receiverId
                 + "} \n\t {CARD_NO: " + cardNo
                 + "} \n\t {QUANTITY: " + quantity
                 + "} \n\t {DATE CREATED: " + TimeStamp.ToString("D") + "}";

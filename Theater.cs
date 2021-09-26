@@ -11,7 +11,8 @@ namespace Project2
     class Theater
     {
 
-        private const Int32 max_priceCut = 20;
+        private const int max_priceCut = 20;
+
         private int priceCut_cnt = 1;
 
         private double new_Price = 0.0;
@@ -19,9 +20,11 @@ namespace Project2
 
         private static Random rnd = new Random();
         private static Random rand_date = new Random();
-        private PriceCutEvent pricecutevent;
 
-        public delegate void PriceCutEvent(PriceCutEventHandler p);
+        public delegate void PriceCutHandler(PriceCutEventArgs p);
+        public event PriceCutHandler priceCut;
+
+        private MultiCellBuffer buffer;
 
         private ArrayList orderThreads = new ArrayList();
 
@@ -31,24 +34,31 @@ namespace Project2
         }
 
         //Stop after t-many price cuts
-        public void theaterFunc()
+        //Emmiting event to ticketbroker if price change (new price < oldprice)
+        public void Run_theater()
         {
            while (priceCut_cnt <= max_priceCut)
             {
                 Set_ticketPrice();
-
-                if (new_Price < prev_Price) ;
+                Console.WriteLine("Price: {0}", new_Price);
+                if (new_Price < prev_Price)
                 {
+                    Console.WriteLine("\n----------PRICE CUT OCCURING---------------\n");
                     PriceCutEvent();
                 }
 
-                ProcessOrder(GetOrder(), new_Price);
+                prev_Price = new_Price;
+                process_Order(Order(), new_Price);
             }
 
-           foreach (Thread item in processingThreads)
+           foreach (Thread item in orderThreads)
             {
                 while (item.IsAlive) ;
             }
+
+            Console.WriteLine("Theater Thread {0} is being closed.", Thread.CurrentThread.Name);
+
+
         }
 
         //Using pricing model to set dynamic pricing
@@ -70,40 +80,53 @@ namespace Project2
 
         }
 
-        
-
-        //Emmiting event to ticketbroker if price change (new price < oldprice)
-        public void newPriceEvent()
-        {
-
-        }
-
-
         //Receiving order from MultiCellBuffer
-        public void receive_Order()
+        public OrderClass receive_Order(OrderClass obj)
         {
-
+            return (Program.multiBuffer.getOneCell());
         }
 
 
         //Ccreate order Processing thread
-        public void proccess_Order()
+        public void process_Order(OrderClass order, double new_price)
         {
+            if(order.receiverID == Thread.CurrentThread.Name || order.receiverID == null)
+            {
+                Console.WriteLine("Order for Theater {0}", Thread.CurrentThread.Name);
+                OrderProcessing processer = new OrderProcessing(order, new_price);
+                Thread orderThread = new Thread(new ThreadStart(processer.POrder));
+                orderThreads.Add(orderThread);
+                orderThread.Name = "Processor_" + Thread.CurrentThread.Name;
+                orderThread.Start();
+            } else
+            {
+                Console.WriteLine("Order not for Theater {0}", Thread.CurrentThread.Name);
+            }
+        }
 
+
+        //For each order, spawn an order processing thread
+        public OrderClass Order()
+        {
+            return (Program.multibuffer.getOnceCell());
         }
 
         //Method started by main
 
-        //For each order, spawn an order processing thread
-        public void show_Order()
-        {
-
-        }
+        
        
         //Defines a price cut event to call event handlers in broker 
         public void PriceCutEvent()
         {
-
+            if(priceCut != null)
+            {
+                Console.WriteLine("Performing Price Cut Event #{0} {1}]n", priceCut_cnt, Thread.CurrentThread.Name);
+                priceCut_cnt++;
+                priceCut(new PriceCutEventArgs(Thread.CurrentThread.Name, new_Price));
+            } else
+            {
+                Console.WriteLine("No subscribers \n");
+            }
         }
         
     }
