@@ -43,8 +43,8 @@ namespace Project2
             if (CheckCreditCard(OrderObject.getCardNo))
             {
                 double finalCharge = ChargeStuff(OrderObject.Amount, TicketPrice);
-                Console.WriteLine ("Order from \n\tOrder Cost: {0}" , finalCharge);
-                //still needs to send confermation to Ticket broker
+              //  Console.WriteLine ("Order from \n\tOrder Cost: {0}" , finalCharge);
+                orderProcess(finalCharge); // sends confirmation to ticket broker
             }
             else
             {
