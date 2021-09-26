@@ -81,10 +81,7 @@ namespace Project2
         }
 
         //Receiving order from MultiCellBuffer
-        public OrderClass receive_Order(OrderClass obj)
-        {
-            return (Program.multiBuffer.getOneCell());
-        }
+       
 
 
         //Ccreate order Processing thread
@@ -106,9 +103,9 @@ namespace Project2
 
 
         //For each order, spawn an order processing thread
-        public OrderClass Order()
+        public OrderClass Order(OrderClass obj)
         {
-            return (Program.multibuffer.getOnceCell());
+            return (Program.buffer.getBuffer(obj.getSenderId()));
         }
 
         //Method started by main

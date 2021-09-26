@@ -23,7 +23,7 @@ namespace Project2
             order received within a given time period
         */
         //calculate original price between 40 - 200, return new price
-        public double calc_newPrice(int num_orders, DateTime date_ordered)
+        public static double calc_newPrice(int num_orders, DateTime date_ordered)
         {
             original_price = random.Next(40, 200);
 
@@ -47,7 +47,7 @@ namespace Project2
         }
 
         //Calculate timespan of date order and give discount
-        private double availOrderDiscount(DateTime date_ordered)
+        private static double availOrderDiscount(DateTime date_ordered)
         {
             TimeSpan dateDiff = DateTime.Now - date_ordered;
             int num_days = Int32.Parse(dateDiff.Days.ToString());
@@ -65,7 +65,7 @@ namespace Project2
         }
 
         //calculate discount based on number of orders
-        private double numOrderDiscount(int num_orders)
+        private static double numOrderDiscount(int num_orders)
         {
            if(num_orders == 1)
            {

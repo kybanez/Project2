@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MultiCellBuffer.cs" />
+    <Compile Include="OrderClass.cs" />
+    <Compile Include="PriceCutEventArgs.cs" />
+    <Compile Include="TicketBroker.cs" />
+    <Compile Include="OrderProcessing.cs" />
+    <Compile Include="PricingModel.cs" />
     <Compile Include="Theater.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
