@@ -42,10 +42,10 @@ namespace Project2
 
                 for(int j = 0; j < K; ++j)
                 {
-                    ticketBroker.Subscribe(theaters[j]);
+                    ticketBroker.subscribe(theaters[j]);
                 }
 
-                ticketBroker_threads[i] = new Thread(ticketBroker.RunStore);
+                ticketBroker_threads[i] = new Thread(ticketBroker.Run_ticketBroker);
                 ticketBroker_threads[i].Name = "Ticket Broker: " + i;
                 ticketBroker_threads[i].Start();
                 while (!ticketBroker_threads[i].IsAlive) ;
@@ -60,7 +60,7 @@ namespace Project2
             //alert ticket broker that theater is inactive
             for(int i = 0; i<N; ++i)
             {
-                TicketBroker.theaterActive = false;
+                TicketBroker.setTheaterActive(false);
             }
 
             for (int i = 0; i < N; ++i)

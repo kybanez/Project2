@@ -72,7 +72,6 @@ namespace Project2
             return cardNo;
         }
 
-
         public void setAmount(int astuff)
         {
             amount = astuff;
@@ -82,8 +81,6 @@ namespace Project2
             return amount;
         }
 
-        
-      
         public DateTime TimeStamp
         {
             get
@@ -100,15 +97,10 @@ namespace Project2
         {   
             return senderId;
         } 
-        
         public void setSenderID(string s_ID)
         {
             senderId = s_ID;
         }
-
-
-  
-       
 
         public override string ToString()
         {

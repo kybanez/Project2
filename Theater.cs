@@ -48,7 +48,7 @@ namespace Project2
                 }
 
                 prev_Price = new_Price;
-                process_Order(Order(), new_Price);
+                process_Order(ret_Order(Thread.CurrentThread.Name),new_Price);
             }
 
            foreach (Thread item in orderThreads)
@@ -103,9 +103,9 @@ namespace Project2
 
 
         //For each order, spawn an order processing thread
-        public OrderClass Order(OrderClass obj)
+        public OrderClass ret_Order(string order)
         {
-            return (Program.buffer.getBuffer(obj.getSenderId()));
+            return (Program.buffer.getBuffer(order));
         }
 
         //Method started by main

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Project2
@@ -15,8 +16,8 @@ namespace Project2
 
         public OrderProcessing(OrderClass Torder, double price)
         {
-            OrderObject = Torder;
-            TicketPrice = price;
+            this.OrderObject = Torder;
+            this.TicketPrice = price;
         }
 
         //Validate CC number
@@ -33,23 +34,37 @@ namespace Project2
         //
         private double ChargeStuff(int tickets, double unitPrice)
         {
-            double total = (tickets * unitPrice) + Tax + LocationChange);
+            double total = ((tickets * unitPrice) + Tax + LocationChange);
             return Tax * total + total;
         }
 
         public void POrder()
         {
-            //CardNo variable is made in OderClass.cs
-            if (CheckCreditCard(OrderObject.getCardNo))
+            if(OrderObject !=null )
             {
-                double finalCharge = ChargeStuff(OrderObject.Amount, TicketPrice);
-              //  Console.WriteLine ("Order from \n\tOrder Cost: {0}" , finalCharge);
-                orderProcess(finalCharge); // sends confirmation to ticket broker
+                Console.WriteLine("Processing Order {0} from TicketBroker {1}", Thread.CurrentThread.Name, OrderObject.ToString());
+                //CardNo variable is made in OderClass.cs
+                if (CCard(OrderObject.CardNum))
+                {
+                    Console.WriteLine("Validating {0} Credit Card Number Valid", Thread.CurrentThread.Name);
+                    //double finalCharge = ChargeStuff(OrderObject.Amount, TicketPrice);
+                    //  Console.WriteLine ("Order from \n\tOrder Cost: {0}" , finalCharge);
+                    // orderProcess(finalCharge); // sends confirmation to ticket broker
+                }
+                else
+                {
+                    Console.WriteLine("Error {0} Credit Card Number not Valid ", Thread.CurrentThread.Name);
+                }
+
+                Console.WriteLine("Processing {0} TicketBroker {1} \n TOTAL PRICE: {2}",
+                    Thread.CurrentThread.Name, OrderObject.ToString(), ChargeStuff(OrderObject.Quantity, TicketPrice).ToString());
             }
             else
             {
-                Console.WriteLine("Order from {0} has an invalid credit card number {1}", OrderObject.getSenderId, OrderObject.getCardNo);
+                Console.WriteLine("Processing {0} order not received", Thread.CurrentThread.Name);
             }
+
+          
         }
     }
 }
