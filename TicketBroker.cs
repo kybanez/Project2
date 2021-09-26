@@ -32,7 +32,13 @@ namespace Project2
             }
             priceCutManualResetEvent.Set();
         }
-
+        
+         public void orderProcess(double finalCharge) 
+        {
+            Console.WriteLine("Ticket order has been processed. The amount to be charged is $" + finalCharge);
+        }
+        
+/*
         public void RunStore()
         {
             var orderTimes = new List<long>();
@@ -78,5 +84,6 @@ namespace Project2
 
           }
         }
+   */ 
     }
 }
