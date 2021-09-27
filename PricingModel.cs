@@ -32,7 +32,7 @@ namespace Project2
 
             //discounts 
             double discountPerc = numOrderDiscount(num_orders) + availOrderDiscount(date_ordered);
-            double percent = discountPerc * 100;
+            double percent = discountPerc * 1;
 
             double discPrice = original_price * discountPerc;
 
