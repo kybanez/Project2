@@ -9,7 +9,7 @@ namespace Project2
 {
     class MultiCellBuffer
     {
-        public static Semaphore semaphore = new Semaphore(0, 3);
+        public Semaphore semaphore = new Semaphore(0, 3);
         private static OrderClass[] buffer = new OrderClass[3];
        
 
@@ -26,7 +26,6 @@ namespace Project2
                         return;
                     }
                 }
-                semaphore.WaitOne();
             }
         }
 
@@ -55,7 +54,6 @@ namespace Project2
                 {
                     buffer[index] = null;
                 }
-                semaphore.Release();
                 return order;
             }
         }

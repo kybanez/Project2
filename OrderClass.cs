@@ -14,9 +14,11 @@ namespace Project2
         private int quantity; // # of tickets ordered
         private string senderId; // sender id , thread ID, ticketbroker
         private string receiverId;// recever thread name , 
+        private double total_price;
         private DateTime timestamp = DateTime.Today;
 
-
+      
+       
         public int CardNum
         {
             get
@@ -102,13 +104,24 @@ namespace Project2
             senderId = s_ID;
         }
 
+       public double totalPrice()
+        {
+            total_price = quantity * unitPrice;
+            return total_price;
+           
+        }
+
+
         public override string ToString()
         {
-            string order = "Order Ticket \n\t {SENDER ID: " + senderId
-                + "} \n\t {RECEIVER ID: " + receiverId
-                + "} \n\t {CARD_NO: " + cardNo
-                + "} \n\t {QUANTITY: " + quantity
-                + "} \n\t {DATE CREATED: " + TimeStamp.ToString("D") + "}";
+            string order = "\nOrder Ticket \n" +
+                "\nSENDER ID: " + senderId
+                + "\n\tRECEIVER ID: " + receiverId
+                + "\n\tCARD_NO: " + cardNo
+                + "\n\tQUANTITY: " + quantity
+                + "\n\tTICKET PRICE: $" + unitPrice
+                + "\n\tORDER COST: $" + total_price
+                + "DATE CREATED: " + TimeStamp.ToString("D") ;
 
             return order;
         }

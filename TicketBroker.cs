@@ -86,6 +86,7 @@ namespace Project2
             order.setSenderID(Thread.CurrentThread.Name);
             order.receiverID = theaterID;
 
+            Program.buffer.semaphore.WaitOne();
             Program.buffer.setBuffer(order);
 
 
