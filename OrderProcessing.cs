@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Name: Keyth Ybanez and Zack sanchez
+ * Project: Project 2
+ * Class: CSE445
+ * 
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,7 +63,7 @@ namespace Project2
                 }
 
                 Console.WriteLine("Processing {0} TicketBroker {1} \n TOTAL PRICE: {2}",
-                    Thread.CurrentThread.Name, OrderObject.ToString(), ChargeStuff(OrderObject.Quantity, TicketPrice).ToString());
+                    Thread.CurrentThread.Name, OrderObject.ToString(), ChargeStuff(OrderObject.getAmount(), TicketPrice).ToString());
             }
             else
             {

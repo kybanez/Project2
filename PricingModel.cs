@@ -1,4 +1,10 @@
 ﻿using System;
+/*
+ * Name: Keyth Ybanez and Zack sanchez
+ * Project: Project 2
+ * Class: CSE445
+ * 
+ * */
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +29,11 @@ namespace Project2
             order received within a given time period
         */
         //calculate original price between 40 - 200, return new price
+
+        public double get_original()
+        {
+            return original_price;
+        }
         public static double calc_newPrice(int num_orders, DateTime date_ordered)
         {
             original_price = random.Next(40, 200);

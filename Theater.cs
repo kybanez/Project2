@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Name: Keyth Ybanez and Zack sanchez
+ * Project: Project 2
+ * Class: CSE445
+ * 
+ * */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +20,7 @@ namespace Project2
         private const int max_priceCut = 20;
 
         private int priceCut_cnt = 1;
+        private int ticket_amount;
 
         private double new_Price = 0.0;
         private double prev_Price = 0.0;
@@ -25,6 +32,8 @@ namespace Project2
         public event PriceCutHandler priceCut;
 
         private MultiCellBuffer buffer;
+
+        OrderClass order = new OrderClass();
 
         private ArrayList orderThreads = new ArrayList();
 
@@ -70,13 +79,20 @@ namespace Project2
 
             Console.WriteLine("Today's date is {0}", now.Date);
             DateTime order_date = DateTime.Now.AddDays(range);
+            
+
 
             prev_Price = new_Price;
             Random rand_numOrder = new Random();
-            int num_order = rand_numOrder.Next(1, 2);
+            int num_order = rand_numOrder.Next(1, 10);
 
+            ticket_amount = num_order;
             new_Price = PricingModel.calc_newPrice(num_order, order_date);
+            Console.WriteLine("new price {0}, with the quantity {1}", new_Price, num_order);
             prev_Price = PricingModel.original_price;
+            order.setAmount(num_order);
+            
+            
 
         }
 
@@ -117,13 +133,18 @@ namespace Project2
         {
             if(priceCut != null)
             {
-                Console.WriteLine("Performing Price Cut Event #{0} {1}]n", priceCut_cnt, Thread.CurrentThread.Name);
+                Console.WriteLine("Performing Price Cut Event #{0} {1}", priceCut_cnt, Thread.CurrentThread.Name);
                 priceCut_cnt++;
                 priceCut(new PriceCutEventArgs(Thread.CurrentThread.Name, new_Price));
             } else
             {
                 Console.WriteLine("No subscribers \n");
             }
+        }
+
+        public int get_ticket()
+        {
+            return ticket_amount;
         }
         
     }

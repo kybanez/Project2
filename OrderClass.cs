@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Name: Keyth Ybanez and Zack sanchez
+ * Project: Project 2
+ * Class: CSE445
+ * 
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +17,8 @@ namespace Project2
         private double unitPrice; //ticket unit price; tickets received from theater
         private int cardNo;//credit card numbrt
         private int amount; //ticket amount
-        private int quantity; // # of tickets ordered
         private string senderId; // sender id , thread ID, ticketbroker
         private string receiverId;// recever thread name , 
-        private double total_price;
         private DateTime timestamp = DateTime.Today;
 
       
@@ -51,17 +55,6 @@ namespace Project2
             set
             {
                 receiverId = value;
-            }
-        }
-        public int Quantity
-        {
-            get
-            {
-                return quantity;
-            } 
-            set
-            {
-                quantity = value;
             }
         }
 
@@ -104,24 +97,17 @@ namespace Project2
             senderId = s_ID;
         }
 
-       public double totalPrice()
-        {
-            total_price = quantity * unitPrice;
-            return total_price;
-           
-        }
-
 
         public override string ToString()
         {
-            string order = "\nOrder Ticket \n" +
-                "\nSENDER ID: " + senderId
+            string order = "\nOrder Ticket " +
+                "\n\tSENDER ID: " + getSenderId()
                 + "\n\tRECEIVER ID: " + receiverId
-                + "\n\tCARD_NO: " + cardNo
-                + "\n\tQUANTITY: " + quantity
+                + "\n\tCARD_NO: " + getCardNo()
+                + "\n\tQUANTITY: " + getAmount()
                 + "\n\tTICKET PRICE: $" + unitPrice
-                + "\n\tORDER COST: $" + total_price
-                + "DATE CREATED: " + TimeStamp.ToString("D") ;
+                + "\n\tORDER COST: $" + getAmount()
+                + "\n\tDATE CREATED: " + TimeStamp.ToString("g") ;
 
             return order;
         }

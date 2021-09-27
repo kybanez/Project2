@@ -1,4 +1,11 @@
-﻿namespace Project2
+﻿/*
+ * Name: Keyth Ybanez and Zack sanchez
+ * Project: Project 2
+ * Class: CSE445
+ * 
+ * */
+
+namespace Project2
 {
     internal class PriceCutEventArgs
     {

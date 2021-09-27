@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Name: Keyth Ybanez and Zack sanchez
+ * Project: Project 2
+ * Class: CSE445
+ * 
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,11 +31,13 @@ namespace Project2
         public static int[] CC = new int[5];
         private void create_CC()
         {
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int temp_CC = CC_rnd.Next(5000, 7000);
                 CC[i] = temp_CC;
+                
             }
+            
         }
 
 
@@ -44,6 +52,13 @@ namespace Project2
 
         public void Run_ticketBroker()
         {
+            create_CC();
+            Console.WriteLine("Credit cards are: ");
+           for(int i = 0; i < 5; ++i)
+            {
+                Console.WriteLine(CC[i]);
+            }
+
             while (TheaterActive)
             {
                 if(ticket_Demand)
@@ -81,8 +96,11 @@ namespace Project2
 
             ticket_Demand = false;
             OrderClass order = new OrderClass();
-            order.Amount = 25;
+            
+          
+            order.Amount = order.getAmount();
             order.CardNum = CC[rand.Next(0, 4)];
+
             order.setSenderID(Thread.CurrentThread.Name);
             order.receiverID = theaterID;
 
@@ -97,8 +115,12 @@ namespace Project2
             Console.WriteLine("Single Order {0}", Thread.CurrentThread.Name);
 
             ticket_Demand = false;
+            int choose_arr = rand.Next(0, 4);
+            int credit_cardNum = CC[choose_arr];
+
+            
             OrderClass order = new OrderClass();
-            order.Amount = 10;
+            order.Amount = order.getAmount();
             order.CardNum = CC[rand.Next(0, 4)];
             order.setSenderID(Thread.CurrentThread.Name);
             order.receiverID = theaterID;
